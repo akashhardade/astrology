@@ -1,4 +1,4 @@
-package com.example.astrology
+package com.astrology.azx
 
 import io.flutter.embedding.android.FlutterActivity
 

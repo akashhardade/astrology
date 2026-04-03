@@ -11,11 +11,13 @@ import 'repositories/horoscope_repository.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await MobileAds.instance.initialize();
-
-  // Add test device ID to see ads during development on your physical device
-  MobileAds.instance.updateRequestConfiguration(
-    RequestConfiguration(testDeviceIds: ["FC6DD31B4EBB2F0DE9C366A92705D65B"]),
+  RequestConfiguration configuration = RequestConfiguration(
+    tagForChildDirectedTreatment: TagForChildDirectedTreatment.yes,
+    tagForUnderAgeOfConsent: TagForUnderAgeOfConsent.yes,
+    maxAdContentRating: MaxAdContentRating.g,
   );
+
+  MobileAds.instance.updateRequestConfiguration(configuration);
 
   runApp(const AstrologyApp());
 }
@@ -636,8 +638,6 @@ Widget bottomNav(context, {bool hideShare = false, String? shareText}) {
             onTap: () {
               if (shareText != null) {
                 Share.share(shareText);
-              } else {
-                Share.share("Check out this daily horoscope app!");
               }
             },
             child: const Row(
